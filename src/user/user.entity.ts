@@ -19,6 +19,9 @@ export class User {
 	get passwordHash() {
 		return this._passwordHash;
 	}
+	set passwordHash(password: string) {
+		this._passwordHash = password;
+	}
 
 	async setPasssword(password: string) {
 		const salt = await genSalt(10);
