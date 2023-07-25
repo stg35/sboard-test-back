@@ -1,5 +1,15 @@
 version: '3.8'
 services:
+    back:
+        container_name: 'back'
+        build: .
+        depends_on:
+            - postgres
+        restart: always
+        ports:
+            - 3000:3000
+        volumes:
+            - ./.env:/opt/app/.env
     postgres:
         container_name: 'postgres-db'
         image: postgres:12-alpine
