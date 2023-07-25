@@ -2,7 +2,7 @@ import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { ProductDto } from './dto/product.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Product } from './product.entity';
-import { DeleteResult, Repository } from 'typeorm';
+import { Repository } from 'typeorm';
 import { PRODUCT_NOT_FOUND_ERROR } from './product.constants';
 
 @Injectable()
