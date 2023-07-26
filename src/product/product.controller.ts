@@ -13,13 +13,13 @@ import {
 import { ProductService } from './product.service';
 import { ProductDto } from './dto/product.dto';
 import { PRODUCT_NOT_FOUND_ERROR } from './product.constants';
-import { JwtAuthGuard } from 'src/auth/guard/jwt.guard';
+import { AccessTokenGuard } from 'src/auth/guard/accessToken.guard';
 
 @Controller('product')
 export class ProductController {
 	constructor(private readonly productService: ProductService) {}
 
-	@UseGuards(JwtAuthGuard)
+	@UseGuards(AccessTokenGuard)
 	@Post('create')
 	async create(@Body() dto: ProductDto) {
 		return this.productService.create(dto);
@@ -39,7 +39,7 @@ export class ProductController {
 		return product;
 	}
 
-	@UseGuards(JwtAuthGuard)
+	@UseGuards(AccessTokenGuard)
 	@Delete(':id')
 	async delete(@Param('id') id: string) {
 		const isDeleted = await this.productService.delete(Number(id));
@@ -48,7 +48,7 @@ export class ProductController {
 		}
 	}
 
-	@UseGuards(JwtAuthGuard)
+	@UseGuards(AccessTokenGuard)
 	@Patch('update/:id')
 	async update(@Param('id') id: string, @Body() dto: ProductDto) {
 		return this.productService.update(Number(id), dto);

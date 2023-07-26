@@ -6,15 +6,19 @@ import { AuthDto } from 'src/auth/dto/auth.dto';
 
 @Injectable()
 export class UserService {
-	constructor(@InjectRepository(User) private readonly productRepository: Repository<User>) {}
+	constructor(@InjectRepository(User) private readonly userRepository: Repository<User>) {}
 
 	async createUser(dto: AuthDto): Promise<User> {
 		const newUser = new User(dto.login);
 		await newUser.setPasssword(dto.password);
-		return this.productRepository.save(newUser);
+		return this.userRepository.save(newUser);
 	}
 
 	async findUser(email: string): Promise<User | null> {
-		return this.productRepository.findOneBy({ email });
+		return this.userRepository.findOneBy({ email });
+	}
+
+	async update(user: User) {
+		return this.userRepository.save(user);
 	}
 }
