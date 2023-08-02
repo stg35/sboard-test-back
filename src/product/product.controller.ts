@@ -25,11 +25,13 @@ export class ProductController {
 		return this.productService.create(dto);
 	}
 
+	@UseGuards(AccessTokenGuard)
 	@Get()
 	async getAll() {
 		return this.productService.getAll();
 	}
 
+	@UseGuards(AccessTokenGuard)
 	@Get(':id')
 	async getById(@Param('id') id: string) {
 		const product = await this.productService.getById(Number(id));
